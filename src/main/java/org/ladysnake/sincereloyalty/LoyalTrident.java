@@ -44,7 +44,7 @@ public interface LoyalTrident {
 
     @Nullable
     static UUID getTridentUuid(ItemStack stack) {
-        NbtCompound loyaltyData = stack.getSubNbt(LoyalTrident.MOD_NBT_KEY);
+        NbtCompound loyaltyData = stack.get(LoyalTrident.MOD_NBT_KEY);
         if (loyaltyData == null || !loyaltyData.containsUuid(TRIDENT_OWNER_NBT_KEY)) {
             return null;
         }
@@ -55,12 +55,12 @@ public interface LoyalTrident {
     }
 
     static void setPreferredSlot(ItemStack tridentStack, int slot) {
-        tridentStack.getOrCreateSubNbt(LoyalTrident.MOD_NBT_KEY).putInt(LoyalTrident.RETURN_SLOT_NBT_KEY, slot);
+        tridentStack.set(LoyalTrident.MOD_NBT_KEY).putInt(LoyalTrident.RETURN_SLOT_NBT_KEY, slot);
     }
 
     static boolean hasTrueOwner(ItemStack tridentStack) {
         if (tridentStack.isIn(SincereLoyalty.TRIDENTS) && LoyaltyBindingRecipe.isLoyalEnough(tridentStack)) {
-            NbtCompound loyaltyNbt = tridentStack.getSubNbt(MOD_NBT_KEY);
+            NbtCompound loyaltyNbt = tridentStack.get(MOD_NBT_KEY);
             return loyaltyNbt != null && loyaltyNbt.containsUuid(TRIDENT_OWNER_NBT_KEY);
         }
         return false;
@@ -68,12 +68,12 @@ public interface LoyalTrident {
 
     @Nullable
     static UUID getTrueOwner(ItemStack tridentStack) {
-        return hasTrueOwner(tridentStack) ? Objects.requireNonNull(tridentStack.getSubNbt(MOD_NBT_KEY)).getUuid(TRIDENT_OWNER_NBT_KEY) : null;
+        return hasTrueOwner(tridentStack) ? Objects.requireNonNull(tridentStack.get(MOD_NBT_KEY)).getUuid(TRIDENT_OWNER_NBT_KEY) : null;
     }
 
     @Nullable
     static TridentEntity spawnTridentForStack(Entity thrower, ItemStack tridentStack) {
-        NbtCompound loyaltyData = tridentStack.getSubNbt(MOD_NBT_KEY);
+        NbtCompound loyaltyData = tridentStack.get(MOD_NBT_KEY);
         if (loyaltyData != null) {
             UUID ownerUuid = loyaltyData.getUuid(TRIDENT_OWNER_NBT_KEY);
             if (ownerUuid != null) {

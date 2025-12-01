@@ -93,7 +93,8 @@ dependencies {
 		exclude group: "net.fabricmc.fabric-api"
 	}
 
-  modImplementation "it.crystalnest:soul-fire-d-fabric:${project.minecraft_version}-${soul_fire_d_version}"
+  //modImplementation "it.crystalnest:soul-fire-d-fabric:${project.minecraft_version}-${soul_fire_d_version}"
+    modImplementation "it.crystalnest:soul-fire-d-fabric:1.21-${soul_fire_d_version}"
 }
 
 processResources {

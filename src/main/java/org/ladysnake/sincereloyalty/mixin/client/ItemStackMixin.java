@@ -79,11 +79,11 @@ public abstract class ItemStackMixin {
     }
 
     @Shadow
-    public abstract NbtCompound getSubNbt(String key);
+    public abstract NbtCompound get(String key);
 
     @Inject(method = "getTooltip", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;appendEnchantments(Ljava/util/List;Lnet/minecraft/nbt/NbtList;)V"))
     private void captureThis(PlayerEntity player, TooltipContext context, CallbackInfoReturnable<List<Text>> cir) {
-        NbtCompound loyaltyNbt = this.getSubNbt(LoyalTrident.MOD_NBT_KEY);
+        NbtCompound loyaltyNbt = this.get(LoyalTrident.MOD_NBT_KEY);
         if (loyaltyNbt != null && loyaltyNbt.contains(LoyalTrident.OWNER_NAME_NBT_KEY)) {
             impaled$trueOwnerName = loyaltyNbt.getString(LoyalTrident.OWNER_NAME_NBT_KEY);
             impaled$riptide = EnchantmentHelper.getRiptide((ItemStack) (Object) this) > 0;

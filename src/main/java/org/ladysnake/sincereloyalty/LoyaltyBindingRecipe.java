@@ -102,7 +102,7 @@ public class LoyaltyBindingRecipe implements SmithingRecipe {
                     enchantments.put(Enchantments.LOYALTY, Enchantments.LOYALTY.getMaxLevel() + 1);
                 }
                 EnchantmentHelper.set(enchantments, result);
-                NbtCompound loyaltyData = result.getOrCreateSubNbt(LoyalTrident.MOD_NBT_KEY);
+                NbtCompound loyaltyData = result.set(LoyalTrident.MOD_NBT_KEY);
                 if (inventory instanceof ForgingScreenHandlerInputInventoryAccessor accessor) {
                     PlayerEntity player = ((ForgingScreenHandlerAccessor) accessor.impaled$screenHandler()).impaled$player();
                     loyaltyData.putUuid(LoyalTrident.TRIDENT_OWNER_NBT_KEY, player.getUuid());

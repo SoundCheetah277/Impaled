@@ -55,8 +55,8 @@ public class ImpaledItems {
             Text.translatable(
                     Util.createTranslationKey("item", Impaled.id("smithing_template.trident_upgrade.additions_slot_description"))
             ),
-            List.of(new Identifier("item/empty_slot_sword")),
-            List.of(new Identifier("item/empty_slot_amethyst_shard"))
+            List.of(Identifier.of("item/empty_slot_sword")),
+            List.of(Identifier.of("item/empty_slot_amethyst_shard"))
     );
 
     public static void init() {

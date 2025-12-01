@@ -30,7 +30,7 @@ public class ImpaledTridentItemRenderer implements BuiltinItemRendererRegistry.D
     private BakedModel inventoryTridentModel;
 
     public ImpaledTridentItemRenderer(Identifier tridentId, Identifier texture, EntityModelLayer modelLayer) {
-        this.id = new Identifier(tridentId.getNamespace(), tridentId.getPath() + "_renderer");
+        this.id = Identifier.of(tridentId.getNamespace(), tridentId.getPath() + "_renderer");
         this.tridentId = tridentId;
         this.texture = texture;
         this.modelLayer = modelLayer;

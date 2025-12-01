@@ -10,7 +10,7 @@ import org.ladysnake.sincereloyalty.TridentRecaller;
 
 public final class BetterLoyalty {
     public static boolean tryInsertTrident(ItemStack stack, PlayerEntity player) {
-        NbtCompound tag = stack.getSubNbt(LoyalTrident.MOD_NBT_KEY);
+        NbtCompound tag = stack.get(LoyalTrident.MOD_NBT_KEY);
         if (tag != null) {
             TridentRecaller caller = (TridentRecaller) player;
 

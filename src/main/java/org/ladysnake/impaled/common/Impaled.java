@@ -14,10 +14,10 @@ import org.ladysnake.impaled.common.init.ImpaledItems;
 public class Impaled implements ModInitializer {
     public static final String MODID = "impaled";
 
-    private static final Identifier BASTION_TREASURE_CHEST_LOOT_TABLE_ID = new Identifier("minecraft", "chests/bastion_treasure");
+    private static final Identifier BASTION_TREASURE_CHEST_LOOT_TABLE_ID = Identifier.of("minecraft", "chests/bastion_treasure");
 
     public static Identifier id(String path) {
-        return new Identifier(MODID, path);
+        return Identifier.of(MODID, path);
     }
 
     @Override

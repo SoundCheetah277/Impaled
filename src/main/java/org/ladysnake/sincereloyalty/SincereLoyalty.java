@@ -67,12 +67,12 @@ public final class SincereLoyalty implements ModInitializer {
             Text.translatable(
                     Util.createTranslationKey("item", id("smithing_template.loyalty_upgrade.additions_slot_description"))
             ),
-            List.of(new Identifier("item/empty_slot_sword")),
-            List.of(new Identifier("item/empty_slot_amethyst_shard"))
+            List.of(Identifier.of("item/empty_slot_sword")),
+            List.of(Identifier.of("item/empty_slot_amethyst_shard"))
     );
 
     public static Identifier id(String path) {
-        return new Identifier(MOD_ID, path);
+        return Identifier.of(MOD_ID, path);
     }
 
     @Override
