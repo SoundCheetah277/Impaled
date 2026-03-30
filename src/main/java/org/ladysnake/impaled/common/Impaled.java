@@ -28,14 +28,14 @@ public class Impaled implements ModInitializer {
         // add loot to dungeons, mineshafts, jungle temples, and stronghold libraries chests loot tables
         UniformLootNumberProvider lootTableRange = UniformLootNumberProvider.create(1, 1);
         LootCondition.Builder chanceLootCondition = RandomChanceLootCondition.builder(60);
-        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, supplier, setter) -> {
-            if (BASTION_TREASURE_CHEST_LOOT_TABLE_ID.equals(id)) {
+        LootTableEvents.MODIFY.register((registryKey, builder, lootTableSource) -> {
+            if (BASTION_TREASURE_CHEST_LOOT_TABLE_ID.equals(registryKey)) {
                 LootPool.Builder lootPool = LootPool.builder()
                         .rolls(lootTableRange)
                         .conditionally(chanceLootCondition)
                         .with(ItemEntry.builder(ImpaledItems.ANCIENT_TRIDENT));
 
-                supplier.pool(lootPool);
+                builder.pool(lootPool);
             }
         });
     }

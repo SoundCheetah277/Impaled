@@ -11,7 +11,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.RangedWeaponItem;
 import net.minecraft.item.TridentItem;
-import net.minecraft.item.Vanishable;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
@@ -24,7 +23,7 @@ import org.ladysnake.sincereloyalty.SincereLoyalty;
 
 import java.util.function.Predicate;
 
-public class MaelstromItem extends RangedWeaponItem implements Vanishable {
+public class MaelstromItem extends RangedWeaponItem {
     public MaelstromItem(Item.Settings settings) {
         super(settings);
     }
@@ -57,7 +56,7 @@ public class MaelstromItem extends RangedWeaponItem implements Vanishable {
                 Inventory inventory = ((PlayerEntity) user).getInventory();
                 for (int i = 0; i < inventory.size(); i++) {
                     ItemStack stackToThrow = ((PlayerEntity) user).getInventory().getStack(i);
-                    if (!stackToThrow.isEmpty() && EnchantmentHelper.getRiptide(stackToThrow) == 0 && stackToThrow.isIn(SincereLoyalty.TRIDENTS)) {
+                    if (!stackToThrow.isEmpty() && EnchantmentHelper.getLevel(Enchantments.RIPTIDE,stackToThrow) == 0 && stackToThrow.isIn(SincereLoyalty.TRIDENTS)) {
                         TridentEntity trident = null;
                         PlayerEntity playerEntity = (PlayerEntity) user;
                         stackToThrow.damage(1, (LivingEntity) playerEntity, livingEntity -> livingEntity.sendToolBreakStatus(user.getActiveHand()));

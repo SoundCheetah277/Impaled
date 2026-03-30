@@ -4,11 +4,14 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
+import net.minecraft.item.ProjectileItem;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
@@ -23,7 +26,7 @@ import org.ladysnake.impaled.common.entity.ImpaledTridentEntity;
 import org.ladysnake.impaled.common.init.ImpaledItems;
 
 public class HellforkItem extends ImpaledTridentItem {
-    public HellforkItem(Settings settings, EntityType<? extends ImpaledTridentEntity> entityType) {
+    public HellforkItem(ProjectileItem.Settings settings, EntityType<? extends ImpaledTridentEntity> entityType) {
         super(settings, entityType);
     }
 
@@ -66,7 +69,7 @@ public class HellforkItem extends ImpaledTridentItem {
         ItemStack itemStack = user.getStackInHand(hand);
         if (itemStack.getDamage() >= itemStack.getMaxDamage() - 1) {
             return TypedActionResult.fail(itemStack);
-        } else if (EnchantmentHelper.getRiptide(itemStack) > 0 && !user.isInLava() && !user.isOnFire() && !(itemStack.hasNbt() && itemStack.getItem() == ImpaledItems.SOULFORK)) {
+        } else if (EnchantmentHelper.getLevel(Enchantments.RIPTIDE, itemStack) > 0 && !user.isInLava() && !user.isOnFire() && !(itemStack.hasNbt() && itemStack.getItem() == ImpaledItems.SOULFORK)) {
             return TypedActionResult.fail(itemStack);
         } else {
             user.setCurrentHand(hand);

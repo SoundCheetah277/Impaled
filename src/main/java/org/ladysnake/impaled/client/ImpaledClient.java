@@ -1,7 +1,7 @@
 package org.ladysnake.impaled.client;
 
 import net.fabricmc.api.ClientModInitializer;
-import net.fabricmc.fabric.api.client.model.ModelLoadingRegistry;
+import net.fabricmc.fabric.api.client.model.loading.v1.ModelLoadingPlugin;
 import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
@@ -10,7 +10,6 @@ import net.fabricmc.fabric.api.object.builder.v1.client.model.FabricModelPredica
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.client.render.entity.model.EntityModelLayers;
-import net.minecraft.client.util.ModelIdentifier;
 import net.minecraft.item.ItemGroups;
 import net.minecraft.registry.Registries;
 import net.minecraft.resource.ResourceType;
@@ -42,7 +41,7 @@ public class ImpaledClient implements ClientModInitializer {
             EntityRendererRegistry.register(item.getEntityType(), ctx -> new ImpaledTridentEntityRenderer(ctx, texture, modelLayer));
 
             FabricModelPredicateProviderRegistry.register(item, Identifier.of("throwing"), (stack, world, entity, seed) -> entity != null && entity.isUsingItem() && entity.getActiveItem() == stack ? 1.0F : 0.0F);
-            ModelLoadingRegistry.INSTANCE.registerModelProvider((manager, out) -> out.accept(new ModelIdentifier(tridentId.getNamespace(), tridentId.getPath() + "_in_inventory", "inventory")));
+            ModelLoadingPlugin.register((context) -> context.addModels(Identifier.of(tridentId.getNamespace(), "item/" + tridentId.getPath())));
         }
 
         // Add items to groups

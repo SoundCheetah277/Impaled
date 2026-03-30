@@ -5,6 +5,7 @@ import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.client.network.ClientPlayerInteractionManager;
 import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -36,7 +37,7 @@ public class InGameHudMixin {
             return;
         }
         ItemStack mainHandStack = player.getMainHandStack();
-        if (EnchantmentHelper.getRiptide(mainHandStack) > 0) {
+        if (EnchantmentHelper.getLevel(Enchantments.RIPTIDE, mainHandStack) > 0) {
             return;
         }
         if (!(mainHandStack.getItem() instanceof ElderTridentItem)) {
