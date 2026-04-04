@@ -1,5 +1,6 @@
 package org.ladysnake.impaled.common.item;
 
+import net.fabricmc.fabric.api.item.v1.FabricItem;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -27,7 +28,7 @@ import java.util.Objects;
 public class ImpaledTridentItem extends TridentItem {
     EntityType<? extends ImpaledTridentEntity> type;
 
-    public ImpaledTridentItem(Settings settings, EntityType<? extends ImpaledTridentEntity> entityType) {
+    public ImpaledTridentItem(FabricItem.Settings settings, EntityType<? extends ImpaledTridentEntity> entityType) {
         super(settings);
         this.type = entityType;
     }
