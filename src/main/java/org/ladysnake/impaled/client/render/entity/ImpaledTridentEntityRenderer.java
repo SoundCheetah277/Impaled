@@ -43,8 +43,7 @@ public class ImpaledTridentEntityRenderer extends EntityRenderer<ImpaledTridentE
         matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(MathHelper.lerp(tickDelta, trident.prevYaw, trident.getYaw()) - 90.0F));
         matrices.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(MathHelper.lerp(tickDelta, trident.prevPitch, trident.getPitch()) + 90.0F));
         VertexConsumer vertexConsumer = ItemRenderer.getDirectItemGlintConsumer(vertexConsumers, this.model.getLayer(this.getTexture(trident)), false, trident.isEnchanted());
-        this.model.render(matrices, vertexConsumer, light, OverlayTexture.DEFAULT_UV, 1.0F, 1.0F, 1.0F, 1.0F);
-        matrices.pop();
+        this.model.render(matrices, vertexConsumer, light, OverlayTexture.DEFAULT_UV, 0xFFFFFFFF);        matrices.pop();
         super.render(trident, yaw, tickDelta, matrices, vertexConsumers, light);
     }
 

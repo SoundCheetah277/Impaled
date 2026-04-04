@@ -6,7 +6,9 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ProjectileItem;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.world.World;
@@ -14,7 +16,7 @@ import org.ladysnake.impaled.common.entity.ImpaledTridentEntity;
 import org.ladysnake.impaled.common.init.ImpaledEntityTypes;
 
 public class ElderTridentItem extends ImpaledTridentItem {
-    public ElderTridentItem(Settings settings, EntityType<? extends ImpaledTridentEntity> entityType) {
+    public ElderTridentItem(ProjectileItem.Settings settings, EntityType<? extends ImpaledTridentEntity> entityType) {
         super(settings, entityType);
     }
 

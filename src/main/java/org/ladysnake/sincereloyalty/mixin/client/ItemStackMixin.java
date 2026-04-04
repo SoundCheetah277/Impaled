@@ -17,12 +17,13 @@
  */
 package org.ladysnake.sincereloyalty.mixin.client;
 
-import net.minecraft.client.item.TooltipContext;
+import net.minecraft.item.Item;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtList;
 import net.minecraft.text.MutableText;
@@ -55,11 +56,11 @@ public abstract class ItemStackMixin {
     @Dynamic("Lambda method")
     @Inject(method = "method_17869", at = @At("RETURN"))
     private static void editTooltip(List<Text> lines, NbtCompound enchantmentNbt, Enchantment enchantment, CallbackInfo info) {
-        if (enchantment == Enchantments.LOYALTY && impaled$trueOwnerName != null) {
+        if (enchantment.toString().equals(Enchantments.LOYALTY.toString()) && impaled$trueOwnerName != null) {
             if (!lines.isEmpty()) {
                 if (impaled$riptide) {
                     // If there is riptide, we present as if there was only one level possible
-                    lines.set(lines.size() - 1, Text.translatable(enchantment.getTranslationKey()).formatted(Formatting.GRAY));
+                    lines.set(lines.size() - 1, Text.translatable("enchantment.minecraft.loyalty").formatted(Formatting.GRAY));
                 }
 
                 MutableText line = (MutableText) lines.get(lines.size() - 1);
@@ -82,11 +83,11 @@ public abstract class ItemStackMixin {
     public abstract NbtCompound get(String key);
 
     @Inject(method = "getTooltip", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;appendEnchantments(Ljava/util/List;Lnet/minecraft/nbt/NbtList;)V"))
-    private void captureThis(PlayerEntity player, TooltipContext context, CallbackInfoReturnable<List<Text>> cir) {
+    private void captureThis(Item.TooltipContext context, PlayerEntity player, TooltipType type, CallbackInfoReturnable<List<Text>> cir)  {
         NbtCompound loyaltyNbt = this.get(LoyalTrident.MOD_NBT_KEY);
         if (loyaltyNbt != null && loyaltyNbt.contains(LoyalTrident.OWNER_NAME_NBT_KEY)) {
             impaled$trueOwnerName = loyaltyNbt.getString(LoyalTrident.OWNER_NAME_NBT_KEY);
-            impaled$riptide = EnchantmentHelper.getRiptide((ItemStack) (Object) this) > 0;
+            impaled$riptide = EnchantmentHelper.getLevel(Enchantments.RIPTIDE, (ItemStack) (Object) this) > 0;
         }
     }
 }

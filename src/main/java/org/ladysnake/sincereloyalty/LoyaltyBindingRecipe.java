@@ -33,6 +33,7 @@ import net.minecraft.recipe.SmithingRecipe;
 import net.minecraft.registry.DynamicRegistryManager;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.JsonHelper;
 import net.minecraft.world.World;
@@ -94,7 +95,7 @@ public class LoyaltyBindingRecipe implements SmithingRecipe {
     public ItemStack craft(Inventory inventory, DynamicRegistryManager registryManager) {
         ItemStack item = inventory.getStack(1);
         if (this.base.test(item)) {
-            Map<Enchantment, Integer> enchantments = EnchantmentHelper.get(item);
+            Map<RegistryEntry<Enchantment>, Integer> enchantments = EnchantmentHelper.getEnchantments(item);
             if (isLoyalEnough(enchantments)) {
                 ItemStack result = item.copy();
                 if (!EnchancementCompat.areTridentsLoyal()) {

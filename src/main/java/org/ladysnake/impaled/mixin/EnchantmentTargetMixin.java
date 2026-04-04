@@ -1,7 +1,7 @@
 package org.ladysnake.impaled.mixin;
 
 import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentTarget;
+import net.minecraft.enchantment.effect.EnchantmentEffectTarget;
 import net.minecraft.item.ItemStack;
 import org.ladysnake.impaled.common.item.AtlanItem;
 import org.spongepowered.asm.mixin.Final;
@@ -15,11 +15,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class EnchantmentTargetMixin {
     @Shadow
     @Final
-    public EnchantmentTarget target;
+    public EnchantmentEffectTarget target;
 
     @Inject(method = "isAcceptableItem", at = @At(value = "RETURN"), cancellable = true)
     public void isAcceptableItem(ItemStack itemStack, CallbackInfoReturnable<Boolean> cir) {
-        if (!cir.getReturnValue() && itemStack.getItem() instanceof AtlanItem && this.target == EnchantmentTarget.WEAPON) {
+        if (!cir.getReturnValue() && itemStack.getItem() instanceof AtlanItem && this.target == EnchantmentEffectTarget.ATTACKER) {
             cir.setReturnValue(true);
         }
     }
