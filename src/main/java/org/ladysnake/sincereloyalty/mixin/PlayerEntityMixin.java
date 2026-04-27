@@ -57,7 +57,7 @@ public abstract class PlayerEntityMixin extends LivingEntity implements TridentR
                 res.writeInt(this.getId());
                 res.writeEnumConstant(recallingTrident);
                 Packet<?> packet = ServerPlayNetworking.createS2CPacket(SincereLoyalty.RECALLING_MESSAGE_ID, res);
-                ((ServerPlayerEntity) (Object) this).networkHandler.sendPacket(packet);
+                (this).networkHandler.sendPacket(packet);
                 for (ServerPlayerEntity player : PlayerLookup.tracking(this)) {
                     player.networkHandler.sendPacket(packet);
                 }

@@ -5,6 +5,7 @@ import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
+import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.entity.projectile.TridentEntity;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.Item;
@@ -19,6 +20,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.UseAction;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 import org.ladysnake.sincereloyalty.SincereLoyalty;
 
 import java.util.function.Predicate;
@@ -96,4 +98,9 @@ public class MaelstromItem extends RangedWeaponItem {
     public int getRange() {
         return 15;
     }
+
+    public void shoot(LivingEntity shooter, ProjectileEntity projectile, int index, float speed, float divergence, float yaw, @Nullable LivingEntity target) {
+        projectile.setVelocity(shooter, shooter.getPitch(), yaw, 0.0F, speed, divergence);
+    }
+
 }

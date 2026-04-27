@@ -40,7 +40,7 @@
   },
   "custom": {
     "loom:injected_interfaces": {
-      "net/minecraft/class_8109": [
+      "net/minecraft/DamageSources": [
         "org/ladysnake/impaled/common/damage/DamageSourcesExt"
       ]
     },

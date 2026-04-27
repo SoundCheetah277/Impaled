@@ -9,6 +9,7 @@ import net.minecraft.entity.mob.ElderGuardianEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.TridentEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import org.jetbrains.annotations.Nullable;
@@ -28,8 +29,8 @@ public abstract class LivingEntityMixin extends EntityMixin {
     private @Nullable Consumer<ItemStack> impaled$dropSink;
 
     @Inject(method = "drop", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;shouldDropLoot()Z"))
-    private void drop(DamageSource source, CallbackInfo ci) {
-        Entity directSource = source.getSource();
+    private void drop(ServerWorld world, DamageSource damageSource, CallbackInfo ci) {
+        Entity directSource = damageSource.getSource();
 
         if (directSource instanceof ElderTridentEntity) {
             this.impaled$dropSink = ((ElderTridentEntity) directSource).getStackFetcher();
@@ -42,7 +43,7 @@ public abstract class LivingEntityMixin extends EntityMixin {
     }
 
     @Inject(method = "drop", at = @At("RETURN"))
-    private void endDrop(DamageSource source, CallbackInfo ci) {
+    private void endDrop(ServerWorld world, DamageSource damageSource, CallbackInfo ci) {
         this.impaled$dropSink = null;
     }
 

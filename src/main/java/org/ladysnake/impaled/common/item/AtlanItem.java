@@ -6,7 +6,7 @@ import net.minecraft.item.ProjectileItem;
 import org.ladysnake.impaled.common.entity.ImpaledTridentEntity;
 
 public class AtlanItem extends ImpaledTridentItem {
-    public AtlanItem(ProjectileItem.Settings settings, EntityType<ImpaledTridentEntity> entityType) {
+    public AtlanItem(Item.Settings settings, EntityType<ImpaledTridentEntity> entityType) {
         super(settings, entityType);
     }
 }

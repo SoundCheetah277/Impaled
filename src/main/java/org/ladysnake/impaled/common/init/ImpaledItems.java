@@ -34,11 +34,11 @@ public class ImpaledItems {
     public static final Set<ImpaledTridentItem> ALL_TRIDENTS = new ReferenceOpenHashSet<>();
     public static final Item ELDER_GUARDIAN_EYE = new Item((new Item.Settings()).rarity(Rarity.UNCOMMON));
     public static final Item ANCIENT_TRIDENT = new Item((new Item.Settings()).rarity(Rarity.UNCOMMON).fireproof());
-    public static final PitchforkItem PITCHFORK = new PitchforkItem((new ProjectileItem.Settings().Settings()).maxDamage(150), ImpaledEntityTypes.PITCHFORK);
-    public static final HellforkItem HELLFORK = new HellforkItem((new ProjectileItem.Settings().Settings()).maxDamage(325).fireproof(), ImpaledEntityTypes.HELLFORK);
-    public static final HellforkItem SOULFORK = new HellforkItem((new ProjectileItem.Settings().Settings()).maxDamage(325).fireproof(), ImpaledEntityTypes.SOULFORK);
-    public static final ElderTridentItem ELDER_TRIDENT = new ElderTridentItem((new ProjectileItem.Settings()).maxDamage(250), ImpaledEntityTypes.ELDER_TRIDENT);
-    public static final AtlanItem ATLAN = new AtlanItem((new ProjectileItem.Settings()).maxDamage(250), ImpaledEntityTypes.ATLAN);
+    public static final PitchforkItem PITCHFORK = new PitchforkItem(new Item.Settings().maxDamage(150), ImpaledEntityTypes.PITCHFORK);
+    public static final HellforkItem HELLFORK = new HellforkItem(new Item.Settings().maxDamage(325).fireproof(), ImpaledEntityTypes.HELLFORK);
+    public static final HellforkItem SOULFORK = new HellforkItem(new Item.Settings().maxDamage(325).fireproof(), ImpaledEntityTypes.SOULFORK);
+    public static final ElderTridentItem ELDER_TRIDENT = new ElderTridentItem(new Item.Settings().maxDamage(250), ImpaledEntityTypes.ELDER_TRIDENT);
+    public static final AtlanItem ATLAN = new AtlanItem(new Item.Settings().maxDamage(250), ImpaledEntityTypes.ATLAN);
     public static final MaelstromItem MAELSTROM = new MaelstromItem((new Item.Settings()).maxDamage(80));
     public static final Item TRIDENT_UPGRADE_SMITHING_TEMPLATE = new SmithingTemplateItem(
             Text.translatable(
