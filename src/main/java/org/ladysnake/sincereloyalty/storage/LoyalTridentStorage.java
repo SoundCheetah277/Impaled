@@ -25,6 +25,7 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtList;
 import net.minecraft.network.packet.s2c.play.PlaySoundS2CPacket;
 import net.minecraft.registry.Registries;
+import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvents;
@@ -55,7 +56,12 @@ public final class LoyalTridentStorage extends PersistentState {
 
     public static LoyalTridentStorage get(ServerWorld world) {
         final String id = SincereLoyalty.MOD_ID + "_trident_storage";
-        return world.getPersistentStateManager().getOrCreate(tag -> fromNbt(world, tag), () -> new LoyalTridentStorage(world), id);
+        Type<LoyalTridentStorage> type = new Type<>(
+                () -> new LoyalTridentStorage(world),
+                (nbt, registryLookup) -> fromNbt(world, nbt),
+                null
+        );
+        return world.getPersistentStateManager().getOrCreate(type, id);
     }
 
     public static LoyalTridentStorage fromNbt(ServerWorld world, NbtCompound tag) {
@@ -143,7 +149,7 @@ public final class LoyalTridentStorage extends PersistentState {
 
     @NotNull
     @Override
-    public NbtCompound writeNbt(NbtCompound tag) {
+    public NbtCompound writeNbt(NbtCompound tag, RegistryWrapper.WrapperLookup registryLookup) {
         if (!this.tridents.isEmpty()) {
             NbtList ownersNbt = new NbtList();
             this.tridents.forEach((ownerUuid, tridents) -> {

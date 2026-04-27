@@ -44,7 +44,7 @@ public interface LoyalTrident {
 
     @Nullable
     static UUID getTridentUuid(ItemStack stack) {
-        NbtCompound loyaltyData = stack.get(LoyalTrident.MOD_NBT_KEY);
+            NbtCompound loyaltyData = stack.get(LoyalTrident.MOD_NBT_KEY);
         if (loyaltyData == null || !loyaltyData.containsUuid(TRIDENT_OWNER_NBT_KEY)) {
             return null;
         }

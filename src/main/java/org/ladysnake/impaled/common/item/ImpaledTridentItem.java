@@ -3,6 +3,7 @@ package org.ladysnake.impaled.common.item;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MovementType;
 import net.minecraft.entity.player.PlayerEntity;
@@ -45,7 +46,7 @@ public class ImpaledTridentItem extends TridentItem {
                 int j = EnchantmentHelper.getLevel(Enchantments.RIPTIDE, stack);
                 if (j <= 0 || canRiptide(player)) {
                     if (!world.isClient) {
-                        stack.damage(1, player, livingEntity -> livingEntity.sendToolBreakStatus(user.getActiveHand()));
+                        stack.damage(1, player, player.getActiveHand() == Hand.MAIN_HAND ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND);
                         if (j == 0) {
                             ImpaledTridentEntity trident = createTrident(world, player, stack);
                             LoyalTrident.of(trident).loyaltrident_setReturnSlot(player.getActiveHand() == Hand.OFF_HAND ? -1 : player.getInventory().selectedSlot);

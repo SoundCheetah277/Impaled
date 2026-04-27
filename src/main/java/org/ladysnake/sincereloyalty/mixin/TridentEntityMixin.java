@@ -45,7 +45,7 @@ import java.util.UUID;
 @Mixin(TridentEntity.class)
 public abstract class TridentEntityMixin extends PersistentProjectileEntity implements LoyalTrident {
     @Unique
-    private static final TrackedData<Boolean> sincereLoyalty$SITTING = DataTracker.registerData(TridentEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
+    private static TrackedData<Boolean> sincereLoyalty$SITTING;
 
     @Shadow
     private ItemStack tridentStack;
@@ -57,8 +57,9 @@ public abstract class TridentEntityMixin extends PersistentProjectileEntity impl
 
     @Inject(method = "initDataTracker", at = @At("RETURN"))
     private void initDataTracker(CallbackInfo ci) {
-        this.getDataTracker().startTracking(sincereLoyalty$SITTING, false);
-    }
+        if (sincereLoyalty$SITTING == null) {
+            sincereLoyalty$SITTING = DataTracker.registerData(TridentEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
+        }    }
 
     @Override
     public UUID loyaltrident_getTridentUuid() {
