@@ -1,5 +1,6 @@
 package org.ladysnake.impaled.common.item;
 
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.LivingEntity;
@@ -12,6 +13,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.RangedWeaponItem;
 import net.minecraft.item.TridentItem;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
@@ -32,7 +34,7 @@ public class MaelstromItem extends RangedWeaponItem {
 
     public void onStoppedUsing(ItemStack stack, World world, LivingEntity user, int remainingUseTicks) {
         if (user instanceof PlayerEntity) {
-            ((PlayerEntity) user).getItemCooldownManager().set(this, 20 - (3 * EnchantmentHelper.getLevel(Enchantments.EFFICIENCY, stack)));
+            ((PlayerEntity) user).getItemCooldownManager().set(this, 20 - (3 * EnchantmentHelper.getLevel((RegistryEntry<Enchantment>) Enchantments.EFFICIENCY, stack)));
         }
     }
 
@@ -53,12 +55,12 @@ public class MaelstromItem extends RangedWeaponItem {
     @Override
     public void usageTick(World world, LivingEntity user, ItemStack maelstromStack, int remainingUseTicks) {
         super.usageTick(world, user, maelstromStack, remainingUseTicks);
-        if (remainingUseTicks % (20 - (3 * EnchantmentHelper.getLevel(Enchantments.EFFICIENCY, maelstromStack))) == 0 && world instanceof ServerWorld) {
+        if (remainingUseTicks % (20 - (3 * EnchantmentHelper.getLevel((RegistryEntry<Enchantment>) Enchantments.EFFICIENCY, maelstromStack))) == 0 && world instanceof ServerWorld) {
             if (user instanceof PlayerEntity) {
                 Inventory inventory = ((PlayerEntity) user).getInventory();
                 for (int i = 0; i < inventory.size(); i++) {
                     ItemStack stackToThrow = ((PlayerEntity) user).getInventory().getStack(i);
-                    if (!stackToThrow.isEmpty() && EnchantmentHelper.getLevel(Enchantments.RIPTIDE,stackToThrow) == 0 && stackToThrow.isIn(SincereLoyalty.TRIDENTS)) {
+                    if (!stackToThrow.isEmpty() && EnchantmentHelper.getLevel((RegistryEntry<Enchantment>) Enchantments.RIPTIDE,stackToThrow) == 0 && stackToThrow.isIn(SincereLoyalty.TRIDENTS)) {
                         TridentEntity trident = null;
                         PlayerEntity playerEntity = (PlayerEntity) user;
                         stackToThrow.damage(1, (LivingEntity) playerEntity, livingEntity -> livingEntity.sendToolBreakStatus(user.getActiveHand()));

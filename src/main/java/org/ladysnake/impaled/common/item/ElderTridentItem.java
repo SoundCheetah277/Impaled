@@ -1,5 +1,6 @@
 package org.ladysnake.impaled.common.item;
 
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.EntityType;
@@ -8,6 +9,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.world.World;
@@ -23,7 +25,7 @@ public class ElderTridentItem extends ImpaledTridentItem {
     public void onStoppedUsing(ItemStack stack, World world, LivingEntity user, int remainingUseTicks) {
         super.onStoppedUsing(stack, world, user, remainingUseTicks);
 
-        int j = EnchantmentHelper.getLevel(Enchantments.RIPTIDE, stack);
+        int j = EnchantmentHelper.getLevel((RegistryEntry<Enchantment>) Enchantments.RIPTIDE, stack);
         int useTime = this.getMaxUseTime(stack, user) - remainingUseTicks;
         if (useTime >= 10 && j > 0) {
             for (int i = 1; i <= j; i++) {

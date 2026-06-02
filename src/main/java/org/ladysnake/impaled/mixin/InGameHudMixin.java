@@ -4,12 +4,14 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.client.network.ClientPlayerInteractionManager;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.GameMode;
@@ -37,7 +39,7 @@ public class InGameHudMixin {
             return;
         }
         ItemStack mainHandStack = player.getMainHandStack();
-        if (EnchantmentHelper.getLevel(Enchantments.RIPTIDE, mainHandStack) > 0) {
+        if (EnchantmentHelper.getLevel((RegistryEntry<Enchantment>) Enchantments.RIPTIDE, mainHandStack) > 0) {
             return;
         }
         if (!(mainHandStack.getItem() instanceof ElderTridentItem)) {

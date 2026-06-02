@@ -26,6 +26,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtList;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
@@ -87,7 +88,7 @@ public abstract class ItemStackMixin {
         NbtCompound loyaltyNbt = this.get(LoyalTrident.MOD_NBT_KEY);
         if (loyaltyNbt != null && loyaltyNbt.contains(LoyalTrident.OWNER_NAME_NBT_KEY)) {
             impaled$trueOwnerName = loyaltyNbt.getString(LoyalTrident.OWNER_NAME_NBT_KEY);
-            impaled$riptide = EnchantmentHelper.getLevel(Enchantments.RIPTIDE, (ItemStack) (Object) this) > 0;
+            impaled$riptide = EnchantmentHelper.getLevel((RegistryEntry<Enchantment>) Enchantments.RIPTIDE, (ItemStack) (Object) this) > 0;
         }
     }
 }

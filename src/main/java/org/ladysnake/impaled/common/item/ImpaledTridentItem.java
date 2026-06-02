@@ -1,5 +1,6 @@
 package org.ladysnake.impaled.common.item;
 
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.EntityType;
@@ -11,6 +12,7 @@ import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.TridentItem;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
@@ -43,7 +45,7 @@ public class ImpaledTridentItem extends TridentItem {
         if (user instanceof PlayerEntity player) {
             int i = this.getMaxUseTime(stack, user) - remainingUseTicks;
             if (i >= 10) {
-                int j = EnchantmentHelper.getLevel(Enchantments.RIPTIDE, stack);
+                int j = EnchantmentHelper.getLevel((RegistryEntry<Enchantment>) Enchantments.RIPTIDE, stack);
                 if (j <= 0 || canRiptide(player)) {
                     if (!world.isClient) {
                         stack.damage(1, player, player.getActiveHand() == Hand.MAIN_HAND ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND);

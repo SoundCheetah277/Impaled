@@ -1,16 +1,18 @@
 package org.ladysnake.impaled.common.enchantment;
 
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.ItemStack;
+import net.minecraft.registry.entry.RegistryEntry;
 import org.ladysnake.impaled.common.item.HellforkItem;
 
 public final class BetterImpaling {
     public static float getAttackDamage(ItemStack stack, Entity target) {
-        int impalingLevel = EnchantmentHelper.getLevel(Enchantments.IMPALING, stack);
+        int impalingLevel = EnchantmentHelper.getLevel((RegistryEntry<Enchantment>) Enchantments.IMPALING, stack);
 
         if (impalingLevel > 0) {
             if (stack.getItem() instanceof HellforkItem) {

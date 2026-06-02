@@ -1,10 +1,12 @@
 package org.ladysnake.impaled.common.entity;
 
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.projectile.TridentEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.world.World;
 import org.ladysnake.impaled.mixin.TridentEntityAccessor;
 
@@ -15,7 +17,7 @@ public class ImpaledTridentEntity extends TridentEntity {
 
     public void setTridentAttributes(ItemStack stack) {
         this.setTridentStack(stack.copy());
-        this.dataTracker.set(TridentEntityAccessor.impaled$getLoyalty(), (byte) EnchantmentHelper.getLevel(Enchantments.LOYALTY, stack));
+        this.dataTracker.set(TridentEntityAccessor.impaled$getLoyalty(), (byte) EnchantmentHelper.getLevel((RegistryEntry<Enchantment>) Enchantments.LOYALTY, stack));
         this.dataTracker.set(TridentEntityAccessor.impaled$getEnchanted(), stack.hasGlint());
     }
 

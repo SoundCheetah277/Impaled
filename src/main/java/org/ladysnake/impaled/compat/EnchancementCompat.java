@@ -26,10 +26,12 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.model.Model;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.projectile.TridentEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.util.Identifier;
 import org.ladysnake.impaled.common.entity.ImpaledTridentEntity;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -55,7 +57,7 @@ public final class EnchancementCompat {
 
     public static boolean areTridentsLoyal() {
         if (enabled) {
-            return ModConfig.allTridentsHaveLoyalty && !EnchancementUtil.isEnchantmentAllowed(Enchantments.LOYALTY);
+            return ModConfig.allTridentsHaveLoyalty && !EnchancementUtil.isEnchantmentAllowed(((RegistryEntry<Enchantment>) Enchantments.LOYALTY).value());
         }
         return false;
     }
